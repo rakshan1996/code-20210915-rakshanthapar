@@ -1,15 +1,21 @@
 const express = require('express');
+const multer =require('multer');
+
 
 const app =express();
-
-
-app.get('/fetchProcessedJson',(req,res)=>{
-
+const storage=multer.diskStorage({
+    destination: (req,file,cb)=>{
+        cb(null,"./public");
+    },
+    filename:function(req,file,cb){
+        cb(null,`${file.fieldname}.json`);
+    }
 });
 
+const upload =multer({storage});
 
-app.post('/processJson',(req,res)=>{
-
+app.post('/processJson', upload.single("health"),(req,res)=>{
+res.send("Ok");
 });
 
 
