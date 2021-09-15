@@ -1,7 +1,10 @@
+//middleware required
 const express = require('express');
 const multer =require('multer');
+const data = require('./processData');
 
 
+//initialized Middleware
 const app =express();
 const storage=multer.diskStorage({
     destination: (req,file,cb)=>{
@@ -14,11 +17,24 @@ const storage=multer.diskStorage({
 
 const upload =multer({storage});
 
+
+
 app.post('/processJson', upload.single("health"),(req,res)=>{
-res.send("Ok");
+    
+
+   var overWeight= data.processData();
+
+res.send(`There are ${overWeight} overweight people in the provided data.`);
 });
 
 
 app.listen(5000,()=>{
     console.log("listening on port 5000");
 });
+
+
+
+
+
+
+
