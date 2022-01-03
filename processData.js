@@ -13,7 +13,7 @@ function processData() {
     
     
         var refinedData = [];
-        var overweightPersonal = 0;
+        var overweightPersonal = 1;
         for (var i = 0; i < data.length; i++) {
             var object = data[i];
             object.BMI = (object.WeightKg / Math.pow(object.HeightCm / 100, 2)).toFixed(1);
